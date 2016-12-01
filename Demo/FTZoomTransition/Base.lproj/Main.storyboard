@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C48b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Prg-RZ-ihu">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Root-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FTZoomTransition" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59K-c2-9e5">
+                                <rect key="frame" x="0.0" y="64" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="56k-oK-u7K"/>
+                                    <constraint firstAttribute="width" constant="100" id="yDy-mh-hob"/>
+                                </constraints>
+                                <state key="normal" image="icon"/>
+                                <state key="highlighted" image="icon"/>
+                                <connections>
+                                    <action selector="handleButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Iw-ww-O7W"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="59K-c2-9e5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="BgK-QI-eEb"/>
+                            <constraint firstItem="59K-c2-9e5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="b4W-sD-tAm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Root" id="qzX-cT-gtA"/>
+                    <connections>
+                        <outlet property="sourceButton" destination="59K-c2-9e5" id="Xuw-TA-5E3"/>
+                        <segue destination="W6i-pS-AMT" kind="presentation" identifier="pushToDetial" id="X9f-S4-WA5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="199" y="-332"/>
+        </scene>
+        <!--Detial-->
+        <scene sceneID="HPH-q0-HYa">
+            <objects>
+                <viewController storyboardIdentifier="DetialViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EuT-zP-8qj" customClass="DetialViewController" customModule="FTZoomTransition" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QCk-5B-CG4"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ds8-ZA-Nqc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qdQ-1v-Tg9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detial" id="qsa-AZ-Cgf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqV-mI-NF0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1641" y="-331"/>
+        </scene>
+        <!--Root Navigation Controller-->
+        <scene sceneID="Qj2-nX-Nut">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Prg-RZ-ihu" customClass="RootNavigationController" customModule="FTZoomTransition" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ggS-XV-DC7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Yuh-al-y0t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hgm-Zm-Ebr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-516" y="-331"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="98I-Gr-SKA">
+            <objects>
+                <navigationController storyboardIdentifier="DetialNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W6i-pS-AMT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ced-tB-gC0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EuT-zP-8qj" kind="relationship" relationship="rootViewController" id="BOJ-Dm-w6g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tot-rq-eQ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924" y="-332"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon" width="200" height="200"/>
+    </resources>
+</document>
