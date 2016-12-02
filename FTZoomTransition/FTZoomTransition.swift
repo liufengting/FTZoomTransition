@@ -14,6 +14,14 @@ public struct FTZoomTransitionElement {
     var sourceFrame : CGRect!
     var targetView : UIView!
     var targetFrame : CGRect!
+    
+    public init(sourceView: UIView, sourceSnapView : UIView, sourceFrame: CGRect, targetView: UIView, targetFrame: CGRect) {
+        self.sourceView = sourceView
+        self.sourceSnapView = sourceSnapView
+        self.sourceFrame = sourceFrame
+        self.targetView = targetView
+        self.targetFrame = targetFrame
+    }
 }
 
 public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
