@@ -3,7 +3,7 @@
 //  FTZoomTransition
 //
 //  Created by liufengting on 30/11/2016.
-//  Copyright © 2016 LiuFengting. All rights reserved.
+//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
 //
 
 import UIKit
@@ -17,37 +17,32 @@ class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        if element == nil {
+            return
+        }
         let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
-        
         let container = transitionContext.containerView
         
         fromVC.view.frame = container.bounds;
         toVC.view.frame = container.bounds;
-        
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 146, width: 375, height: 375))
-//        imageView.image = UIImage(named: "icon")
-//        container.addSubview(imageView)
-//        element.sourceView.isHidden = false
-//        let tempView = element.sourceView.snapshotView(afterScreenUpdates: false)
-        self.element.sourceSnapView.frame = element.targetFrame
-//        container.addSubview(tempView!)
-        
-        self.element.sourceSnapView.isHidden = false
 
-        
-        fromVC.view.alpha = 0
+        self.element.sourceSnapView.frame = element.targetFrame
+        self.element.sourceSnapView.isHidden = false
+        self.element.targetView.isHidden = true
+        toVC.view.alpha = 1
  
         UIView.animate(withDuration: transitionDuration(using: transitionContext),
                        animations:{
                         
+                        fromVC.view.alpha = 0
                         self.element.sourceSnapView.frame = self.element.sourceFrame
 
         }, completion: { (completed) -> () in
             
             self.element.sourceView.isHidden = false
             self.element.sourceSnapView.isHidden = true
-            toVC.view.alpha = 1
+            self.element.targetView.isHidden = false
             transitionContext.completeTransition(completed)
         })
     }

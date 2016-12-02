@@ -61,18 +61,43 @@
                     <view key="view" contentMode="scaleToFill" id="qdQ-1v-Tg9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Detial" id="qsa-AZ-Cgf"/>
+                    <navigationItem key="navigationItem" title="Detial" id="qsa-AZ-Cgf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="CY5-zk-R6V">
+                            <connections>
+                                <segue destination="Uli-xY-2r7" kind="show" id="Gcf-5w-W9l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqV-mI-NF0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1641" y="-331"/>
         </scene>
-        <!--Root Navigation Controller-->
+        <!--Something-->
+        <scene sceneID="PGe-Yu-VRA">
+            <objects>
+                <viewController id="Uli-xY-2r7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9E3-RF-DWC"/>
+                        <viewControllerLayoutGuide type="bottom" id="zAd-Fy-gUx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ea0-hp-Vev">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Something" id="Z4f-Yv-7iB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sra-OX-YFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2409" y="-335"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="Qj2-nX-Nut">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Prg-RZ-ihu" customClass="RootNavigationController" customModule="FTZoomTransition" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Prg-RZ-ihu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ggS-XV-DC7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
