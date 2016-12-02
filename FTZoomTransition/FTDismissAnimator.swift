@@ -34,21 +34,13 @@ class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
  
         UIView.animate(withDuration: transitionDuration(using: transitionContext),
                        animations:{
-                        
                         fromVC.view.alpha = 0
                         self.element.sourceSnapView.frame = self.element.sourceFrame
-
         }, completion: { (completed) -> () in
-            
             self.element.sourceView.isHidden = false
             self.element.sourceSnapView.isHidden = true
             self.element.targetView.isHidden = false
             transitionContext.completeTransition(completed)
         })
     }
-    
-    func animationEnded(_ transitionCompleted: Bool) {
-        
-    }
-    
 }

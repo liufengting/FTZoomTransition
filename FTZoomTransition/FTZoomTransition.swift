@@ -16,7 +16,7 @@ struct FTZoomTransitionElement {
     var targetFrame : CGRect!
 }
 
-class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
+public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
 
     var element : FTZoomTransitionElement! {
         willSet{
