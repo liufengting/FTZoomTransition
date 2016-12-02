@@ -8,15 +8,15 @@
 
 import UIKit
 
-class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
+public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     
-    var element : FTZoomTransitionElement!
+    public var element : FTZoomTransitionElement!
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
         return 0.3
     }
     
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if element == nil {
             return
         }

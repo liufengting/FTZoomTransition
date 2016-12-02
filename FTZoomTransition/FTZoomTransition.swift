@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct FTZoomTransitionElement {
+public struct FTZoomTransitionElement {
     var sourceView : UIView!
     var sourceSnapView : UIView!
     var sourceFrame : CGRect!
@@ -18,7 +18,7 @@ struct FTZoomTransitionElement {
 
 public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
 
-    var element : FTZoomTransitionElement! {
+    public var element : FTZoomTransitionElement! {
         willSet{
             presentAnimator.element = newValue
             dismissAnimator.element = newValue
