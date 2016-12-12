@@ -11,36 +11,61 @@ import UIKit
 public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     
     public var element : FTZoomTransitionElement!
-
+    
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
-        return 0.3
+        return 0.5
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if element == nil {
             return
         }
+        
         let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         let container = transitionContext.containerView
         
         fromVC.view.frame = container.bounds;
+        toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
         toVC.view.frame = container.bounds;
-
+        toVC.view.alpha = 0
+        
+        container.addSubview(toVC.view)
+        container.addSubview(self.element.sourceSnapView)
+        
         self.element.sourceSnapView.frame = element.targetFrame
         self.element.sourceSnapView.isHidden = false
         self.element.targetView.isHidden = true
-        toVC.view.alpha = 1
- 
-        UIView.animate(withDuration: transitionDuration(using: transitionContext),
-                       animations:{
-                        fromVC.view.alpha = 0
-                        self.element.sourceSnapView.frame = self.element.sourceFrame
+
+        let zoomScale : CGFloat = self.element.targetFrame.size.width/self.element.sourceFrame.size.width
+        
+        toVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
+        
+        UIView.animateKeyframes(
+            withDuration: transitionDuration(using: transitionContext),
+            delay: 0,
+            options: .calculationModeCubic,
+            animations:{
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
+                    toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                    self.element.sourceSnapView.frame = self.element.sourceFrame
+                    toVC.view.alpha = 1
+                })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.4, animations: {
+                    fromVC.view.alpha = 0
+                })
+                
+                
         }, completion: { (completed) -> () in
-            self.element.sourceView.isHidden = false
-            self.element.sourceSnapView.isHidden = true
-            self.element.targetView.isHidden = false
-            transitionContext.completeTransition(completed)
+            
+            if (transitionContext.transitionWasCancelled == true){
+                toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                container.bringSubview(toFront: fromVC.view)
+            }
+            self.element.sourceView.isHidden = transitionContext.transitionWasCancelled
+            self.element.targetView.isHidden = !transitionContext.transitionWasCancelled
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
 }

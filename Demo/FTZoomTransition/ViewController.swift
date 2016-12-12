@@ -21,14 +21,21 @@ class ViewController: UIViewController {
     @IBAction func handleButtonTap(_ sender: UIButton) {
         
         // present
-        
+
+
         let detial = self.storyboard?.instantiateViewController(withIdentifier: "DetialNavigationController") as! UINavigationController
         let detialVC = detial.viewControllers[0] as! DetialViewController
+        
+        let sourceRect = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
+        let targetRect = detialVC.targetImageView.convert(detialVC.targetImageView.bounds, to: UIApplication.shared.keyWindow)
+        
+        transitionDelegate.interActionAnimator.wireToViewController(detialVC)
+
         let element = FTZoomTransitionElement(sourceView: sender,
                                               sourceSnapView: sender.snapshotView(afterScreenUpdates: false)!,
-                                              sourceFrame: sender.frame,
+                                              sourceFrame: sourceRect,
                                               targetView: detialVC.targetImageView,
-                                              targetFrame: detialVC.targetImageView.frame)
+                                              targetFrame: targetRect)
         transitionDelegate.element = element
         detial.modalPresentationStyle = .custom
         detial.transitioningDelegate = transitionDelegate
