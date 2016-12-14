@@ -36,40 +36,45 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         
         self.element.sourceView.isHidden = true
         self.element.targetView.isHidden = true
-        
-        
-        
+
         toVC.view.alpha = 0
-        
-        let sourcePoint : CGPoint = self.element.sourceFrame.origin
-        let targetPoint : CGPoint = self.element.targetFrame.origin
-//        let anchorPoint : CGPoint = CGPoint(x: (targetPoint.x + sourcePoint.x)/2, y: (targetPoint.y + sourcePoint.y)/2)
-        
+
         let zoomScale : CGFloat = self.element.targetFrame.size.width/self.element.sourceFrame.size.width
         
-        if sourcePoint.x < container.bounds.size.width/2 {
-            fromVC.view.setAnchorPoint(anchorPoint: CGPoint(x: sourcePoint.x/container.bounds.size.width, y: (sourcePoint.y*zoomScale-targetPoint.y)/container.bounds.size.height))
-        }else{
-            fromVC.view.setAnchorPoint(anchorPoint: CGPoint(x: (self.element.sourceFrame.origin.x + self.element.sourceFrame.size.width)/container.bounds.size.width, y: (sourcePoint.y*zoomScale-targetPoint.y)/container.bounds.size.height))
+        if self.element.enableZoom == true {
+            let sourcePoint : CGPoint = self.element.sourceFrame.origin
+            let targetPoint : CGPoint = self.element.targetFrame.origin
+            //        let anchorPoint : CGPoint = CGPoint(x: (targetPoint.x + sourcePoint.x)/2, y: (targetPoint.y + sourcePoint.y)/2)
+            
+            
+            if sourcePoint.x < container.bounds.size.width/2 {
+                fromVC.view.setAnchorPoint(anchorPoint: CGPoint(x: sourcePoint.x/container.bounds.size.width, y: (sourcePoint.y*zoomScale-targetPoint.y)/container.bounds.size.height))
+            }else{
+                fromVC.view.setAnchorPoint(anchorPoint: CGPoint(x: (self.element.sourceFrame.origin.x + self.element.sourceFrame.size.width)/container.bounds.size.width, y: (sourcePoint.y*zoomScale-targetPoint.y)/container.bounds.size.height))
+            }
+            
+            //        let ab = CATransform3DMakeScale(zoomScale, zoomScale, 1)
+            //        let ac = CATransform3DMakeTranslation(10, 20, 0)
+            //        let combinedTransform = CATransform3DConcat(ab, ac)
         }
-        
-        //        let ab = CATransform3DMakeScale(zoomScale, zoomScale, 1)
-        //        let ac = CATransform3DMakeTranslation(10, 20, 0)
-        //        let combinedTransform = CATransform3DConcat(ab, ac)
+
 
         UIView.animateKeyframes(
             withDuration: transitionDuration(using: transitionContext),
             delay: 0,
             options: .calculationModeCubic,
             animations: {
-                
-                
+
                 UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1, animations: {
-                    fromVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
                     self.element.sourceSnapView.frame = self.element.targetFrame
                     fromVC.view.alpha = 0
+
                 })
-                
+                if self.element.enableZoom == true {
+                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1, animations: {
+                        fromVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
+                    })
+                }
                 UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4, animations: {
                     toVC.view.alpha = 1
                 })

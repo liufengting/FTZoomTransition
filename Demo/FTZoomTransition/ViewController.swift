@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var sourceButton: UIButton!
     
-    let transitionDelegate = FTZoomTransition()
+    let ftZoomTransition = FTZoomTransition()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +29,20 @@ class ViewController: UIViewController {
         let sourceRect = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
         let targetRect = detialVC.targetImageView.convert(detialVC.targetImageView.bounds, to: UIApplication.shared.keyWindow)
         
-        transitionDelegate.interActionAnimator.wireToViewController(detialVC)
+        ftZoomTransition.interactiveAnimator.wireToViewController(detialVC)
 
         let element = FTZoomTransitionElement(sourceView: sender,
                                               sourceSnapView: sender.snapshotView(afterScreenUpdates: false)!,
                                               sourceFrame: sourceRect,
                                               targetView: detialVC.targetImageView,
                                               targetFrame: targetRect)
-        transitionDelegate.element = element
-        detial.modalPresentationStyle = .custom
-        detial.transitioningDelegate = transitionDelegate
+        
+//        element.enableZoom = true
+        
+        ftZoomTransition.element = element
+        
+        
+        detial.transitioningDelegate = ftZoomTransition
         self.present(detial, animated: true, completion: {})
 
     }

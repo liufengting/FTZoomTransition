@@ -39,7 +39,9 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
 
         let zoomScale : CGFloat = self.element.targetFrame.size.width/self.element.sourceFrame.size.width
         
-        toVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
+        if self.element.enableZoom == true {
+            toVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
+        }
         
         UIView.animateKeyframes(
             withDuration: transitionDuration(using: transitionContext),
@@ -47,10 +49,15 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
             options: .calculationModeCubic,
             animations:{
                 UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
-                    toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
                     self.element.sourceSnapView.frame = self.element.sourceFrame
                     toVC.view.alpha = 1
                 })
+                
+                if self.element.enableZoom == true {
+                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
+                        toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                    })
+                }
                 
                 UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.4, animations: {
                     fromVC.view.alpha = 0

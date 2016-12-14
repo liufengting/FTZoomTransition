@@ -10,6 +10,7 @@
 		2A815F1D1DEFCED800A95C11 /* FTDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */; };
 		2A815F1F1DEFCED800A95C11 /* FTPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */; };
 		2A815F201DEFCED800A95C11 /* FTZoomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */; };
+		2AD864D31E01085D0012E822 /* FTInteractiveAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD864D21E01085D0012E822 /* FTInteractiveAnimator.swift */; };
 		2AF2B1321DED62EB006CC00A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF2B1311DED62EB006CC00A /* AppDelegate.swift */; };
 		2AF2B1341DED62EB006CC00A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF2B1331DED62EB006CC00A /* ViewController.swift */; };
 		2AF2B1371DED62EB006CC00A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AF2B1351DED62EB006CC00A /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTDismissAnimator.swift; sourceTree = "<group>"; };
 		2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPresentAnimator.swift; sourceTree = "<group>"; };
 		2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTZoomTransition.swift; sourceTree = "<group>"; };
+		2AD864D21E01085D0012E822 /* FTInteractiveAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTInteractiveAnimator.swift; sourceTree = "<group>"; };
 		2AF2B12E1DED62EB006CC00A /* FTZoomTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTZoomTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF2B1311DED62EB006CC00A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AF2B1331DED62EB006CC00A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 				2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */,
 				2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */,
 				2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */,
+				2AD864D21E01085D0012E822 /* FTInteractiveAnimator.swift */,
 			);
 			name = FTZoomTransition;
 			path = ../../FTZoomTransition;
@@ -112,7 +115,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = LiuFengting;
 				TargetAttributes = {
 					2AF2B12D1DED62EB006CC00A = {
@@ -163,6 +166,7 @@
 				2AF2B1321DED62EB006CC00A /* AppDelegate.swift in Sources */,
 				2A815F201DEFCED800A95C11 /* FTZoomTransition.swift in Sources */,
 				2A815F1F1DEFCED800A95C11 /* FTPresentAnimator.swift in Sources */,
+				2AD864D31E01085D0012E822 /* FTInteractiveAnimator.swift in Sources */,
 				2A815F1D1DEFCED800A95C11 /* FTDismissAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +211,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -256,6 +261,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
