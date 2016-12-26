@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A6CEF901E10BBF2003F9F30 /* FTInteractiveAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CEF8F1E10BBF2003F9F30 /* FTInteractiveAnimator.swift */; };
 		2AF0BAD81DF14CBF00C4F8FA /* FTZoomTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AF0BAD61DF14CBF00C4F8FA /* FTZoomTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2AF0BAE11DF14D0D00C4F8FA /* FTDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0BADE1DF14D0D00C4F8FA /* FTDismissAnimator.swift */; };
 		2AF0BAE21DF14D0D00C4F8FA /* FTPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0BADF1DF14D0D00C4F8FA /* FTPresentAnimator.swift */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A6CEF8F1E10BBF2003F9F30 /* FTInteractiveAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTInteractiveAnimator.swift; sourceTree = "<group>"; };
 		2AF0BAD31DF14CBF00C4F8FA /* FTZoomTransition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FTZoomTransition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF0BAD61DF14CBF00C4F8FA /* FTZoomTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTZoomTransition.h; sourceTree = "<group>"; };
 		2AF0BAD71DF14CBF00C4F8FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				2AF0BAE01DF14D0D00C4F8FA /* FTZoomTransition.swift */,
 				2AF0BADE1DF14D0D00C4F8FA /* FTDismissAnimator.swift */,
 				2AF0BADF1DF14D0D00C4F8FA /* FTPresentAnimator.swift */,
+				2A6CEF8F1E10BBF2003F9F30 /* FTInteractiveAnimator.swift */,
 				2AF0BAD71DF14CBF00C4F8FA /* Info.plist */,
 			);
 			path = FTZoomTransition;
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF0BAE31DF14D0D00C4F8FA /* FTZoomTransition.swift in Sources */,
+				2A6CEF901E10BBF2003F9F30 /* FTInteractiveAnimator.swift in Sources */,
 				2AF0BAE21DF14D0D00C4F8FA /* FTPresentAnimator.swift in Sources */,
 				2AF0BAE11DF14D0D00C4F8FA /* FTDismissAnimator.swift in Sources */,
 			);
