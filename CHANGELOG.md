@@ -11,6 +11,9 @@
 | 0.0.4 | 2016.12.14 | make some changes |
 | 0.0.5 | 2016.12.14 | make some changes |
 | 0.0.6 | 2016.12.14 | make some changes |
+| 0.0.7 | 2016.12.14 | make some changes |
+| 0.0.8 | 2016.12.14 | make some changes |
+| 0.0.9 | 2016.12.27 | make some adjustments |
 
 
 

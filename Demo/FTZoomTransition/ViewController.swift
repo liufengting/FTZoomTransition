@@ -22,7 +22,6 @@ class ViewController: UIViewController {
         
         // present
 
-
         let detial = self.storyboard?.instantiateViewController(withIdentifier: "DetialNavigationController") as! UINavigationController
         let detialVC = detial.viewControllers[0] as! DetialViewController
         

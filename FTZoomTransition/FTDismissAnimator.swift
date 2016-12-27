@@ -13,7 +13,7 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     public var element : FTZoomTransitionElement!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
-        return 0.5
+        return max(0.4, element.dismissAnimationDuriation)
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -36,7 +36,7 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         self.element.sourceSnapView.frame = element.targetFrame
         self.element.sourceSnapView.isHidden = false
         self.element.targetView.isHidden = true
-
+        
         let zoomScale : CGFloat = self.element.targetFrame.size.width/self.element.sourceFrame.size.width
         
         if self.element.enableZoom == true {
@@ -59,7 +59,7 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                     })
                 }
                 
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.4, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: {
                     fromVC.view.alpha = 0
                 })
                 

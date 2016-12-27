@@ -15,7 +15,9 @@ public class FTZoomTransitionElement {
     var sourceFrame : CGRect!
     var targetView : UIView!
     var targetFrame : CGRect!
-    var enableZoom : Bool = false
+    public var enableZoom : Bool = false
+    public var presentAnimationDuriation : TimeInterval = 0.4
+    public var dismissAnimationDuriation : TimeInterval = 0.4
     
     
     public init(sourceView: UIView, sourceSnapView : UIView, sourceFrame: CGRect, targetView: UIView, targetFrame: CGRect) {
@@ -54,4 +56,26 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
     
 }
 
-
+public extension UIView {
+    
+    // solution found at: http://stackoverflow.com/a/5666430/6310268
+    
+    func setAnchorPoint(anchorPoint: CGPoint) {
+        var newPoint = CGPoint(x: self.bounds.size.width * anchorPoint.x, y: self.bounds.size.height * anchorPoint.y)
+        var oldPoint = CGPoint(x: self.bounds.size.width * self.layer.anchorPoint.x, y: self.bounds.size.height * self.layer.anchorPoint.y)
+        
+        newPoint = newPoint.applying(self.transform)
+        oldPoint = oldPoint.applying(self.transform)
+        
+        var position = self.layer.position
+        position.x -= oldPoint.x
+        position.x += newPoint.x
+        
+        position.y -= oldPoint.y
+        position.y += newPoint.y
+        
+        self.layer.position = position
+        self.layer.anchorPoint = anchorPoint
+    }
+    
+}
