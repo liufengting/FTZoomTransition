@@ -25,8 +25,9 @@ class ViewController: UIViewController {
         let detial = self.storyboard?.instantiateViewController(withIdentifier: "DetialNavigationController") as! UINavigationController
         let detialVC = detial.viewControllers[0] as! DetialViewController
         
-        let sourceRect = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
-        let targetRect = detialVC.targetImageView.convert(detialVC.targetImageView.bounds, to: UIApplication.shared.keyWindow)
+        let sourceRect = self.view.convert(sender.frame, to: UIApplication.shared.keyWindow)
+        var targetRect = detialVC.view.convert(detialVC.targetImageView.frame, to: UIApplication.shared.keyWindow)
+        targetRect.origin.y = 64
         
         ftZoomTransition.interactiveAnimator.wireToViewController(detialVC)
 

@@ -9,9 +9,12 @@
 import UIKit
 
 class DetialViewController: UIViewController {
-
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     public lazy var targetImageView : UIImageView = {
-        let imageView : UIImageView = UIImageView(frame: CGRect(x: 0, y: 64, width: 375, height: 375))
+        let screenWidth = UIScreen.main.bounds.size.width
+        let imageView : UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth))
         imageView.image = UIImage(named: "icon")
         return imageView
     }()
@@ -19,14 +22,16 @@ class DetialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(targetImageView)
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height*2)
+        scrollView.addSubview(targetImageView)
+    }
+    
+    @IBAction func dismissButtonTapped(_ sender: UIBarButtonItem) {
         
-        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTap(gesture:)))
-        self.view.addGestureRecognizer(tap)
+        self.dismiss(animated: true) { 
+            print("dismiss done")
+        }
+
     }
-    
-    @objc func onTap(gesture : UITapGestureRecognizer){
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+
 }
