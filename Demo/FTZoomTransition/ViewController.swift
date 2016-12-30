@@ -26,8 +26,9 @@ class ViewController: UIViewController {
         let detialVC = detial.viewControllers[0] as! DetialViewController
         
         let sourceRect = self.view.convert(sender.frame, to: UIApplication.shared.keyWindow)
-        var targetRect = detialVC.view.convert(detialVC.targetImageView.frame, to: UIApplication.shared.keyWindow)
-        targetRect.origin.y = 64
+        
+        let screenWidth = UIScreen.main.bounds.size.width
+        let targetRect = CGRect(x: 0, y: 64, width: screenWidth, height: screenWidth)
         
         ftZoomTransition.interactiveAnimator.wireToViewController(detialVC)
 
@@ -41,9 +42,10 @@ class ViewController: UIViewController {
         
         ftZoomTransition.element = element
         
-        
         detial.transitioningDelegate = ftZoomTransition
-        self.present(detial, animated: true, completion: {})
+        self.present(detial, animated: true, completion: {
+
+        })
 
     }
 

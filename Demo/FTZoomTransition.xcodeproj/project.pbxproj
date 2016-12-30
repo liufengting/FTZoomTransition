@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A65BA7C1E137B45004A7381 /* FTPanDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A65BA7B1E137B45004A7381 /* FTPanDismissAnimator.swift */; };
 		2A815F1D1DEFCED800A95C11 /* FTDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */; };
 		2A815F1F1DEFCED800A95C11 /* FTPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */; };
 		2A815F201DEFCED800A95C11 /* FTZoomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A65BA7B1E137B45004A7381 /* FTPanDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPanDismissAnimator.swift; sourceTree = "<group>"; };
 		2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTDismissAnimator.swift; sourceTree = "<group>"; };
 		2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPresentAnimator.swift; sourceTree = "<group>"; };
 		2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTZoomTransition.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 				2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */,
 				2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */,
 				2AD864D21E01085D0012E822 /* FTInteractiveAnimator.swift */,
+				2A65BA7B1E137B45004A7381 /* FTPanDismissAnimator.swift */,
 			);
 			name = FTZoomTransition;
 			path = ../../FTZoomTransition;
@@ -166,6 +169,7 @@
 				2AF2B1321DED62EB006CC00A /* AppDelegate.swift in Sources */,
 				2A815F201DEFCED800A95C11 /* FTZoomTransition.swift in Sources */,
 				2A815F1F1DEFCED800A95C11 /* FTPresentAnimator.swift in Sources */,
+				2A65BA7C1E137B45004A7381 /* FTPanDismissAnimator.swift in Sources */,
 				2AD864D31E01085D0012E822 /* FTInteractiveAnimator.swift in Sources */,
 				2A815F1D1DEFCED800A95C11 /* FTDismissAnimator.swift in Sources */,
 			);

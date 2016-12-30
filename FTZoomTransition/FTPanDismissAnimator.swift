@@ -1,16 +1,14 @@
 //
-//  FTInteractiveAnimator.swift
+//  FTPanDismissAnimator.swift
 //  FTZoomTransition
 //
-//  Created by liufengting on 14/12/2016.
-//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
+//  Created by liufengting on 28/12/2016.
+//  Copyright © 2016 LiuFengting. All rights reserved.
 //
 
 import UIKit
 
-public class FTInteractiveAnimator : UIPercentDrivenInteractiveTransition, UIGestureRecognizerDelegate {
-    
-    internal weak var navigationController: UINavigationController?
+public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGestureRecognizerDelegate {
     
     public var interactionInProgress = false
     
@@ -18,24 +16,35 @@ public class FTInteractiveAnimator : UIPercentDrivenInteractiveTransition, UIGes
     
     fileprivate weak var viewController: UIViewController!
     
-    public func wireToViewController(_ viewController: UIViewController!) {
+    fileprivate weak var scrollView: UIScrollView!
+    
+    
+    public func wireToViewController(_ viewController: UIViewController!, for scrollView: UIScrollView) {
         self.viewController = viewController
+        self.scrollView = scrollView
+        
         prepareGestureRecognizerInView(viewController.view)
     }
     
     fileprivate func prepareGestureRecognizerInView(_ view: UIView) {
-        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
-        gesture.edges = UIRectEdge.left
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
     }
     
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        interactionInProgress = true
-        viewController.dismiss(animated: true, completion: nil)
-        return true
+        if scrollView.contentOffset.y <= 0 {
+            if let pan : UIPanGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+                let translation : CGPoint = pan.translation(in: gestureRecognizer.view!.superview!)
+                if translation.y > 0 {
+                    interactionInProgress = true
+                    viewController.dismiss(animated: true, completion: nil)
+                    return true
+                }
+            }
+        }
+        return false
     }
-    
     
     func handleGesture(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         
