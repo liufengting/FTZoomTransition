@@ -3,7 +3,7 @@
 //  FTZoomTransition
 //
 //  Created by liufengting on 30/11/2016.
-//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
+//  Copyright © 2016 LiuFengting <https://github.com/liufengting>. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     public var element : FTZoomTransitionElement!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
-        return max(0.4, element.presentAnimationDuriation)
+        return max(0.3, element.presentAnimationDuriation)
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

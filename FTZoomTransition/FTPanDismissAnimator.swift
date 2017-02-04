@@ -12,17 +12,18 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
     
     public var interactionInProgress = false
     
+    public weak var dismissAnimator: FTDismissAnimator!
+
     fileprivate var shouldCompleteTransition = false
     
     fileprivate weak var viewController: UIViewController!
     
-    fileprivate weak var scrollView: UIScrollView!
+    fileprivate weak var gestureView: UIView!
+
     
-    
-    public func wireToViewController(_ viewController: UIViewController!, for scrollView: UIScrollView) {
+    public func wireToViewController(_ viewController: UIViewController!, for view: UIView) {
         self.viewController = viewController
-        self.scrollView = scrollView
-        
+        self.gestureView = view
         prepareGestureRecognizerInView(viewController.view)
     }
     
@@ -32,31 +33,20 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
         view.addGestureRecognizer(gesture)
     }
     
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if scrollView.contentOffset.y <= 0 {
-            if let pan : UIPanGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-                let translation : CGPoint = pan.translation(in: gestureRecognizer.view!.superview!)
-                if translation.y > 0 {
-                    interactionInProgress = true
-                    viewController.dismiss(animated: true, completion: nil)
-                    return true
-                }
-            }
-        }
-        return false
-    }
-    
-    func handleGesture(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+
+    func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         
-        let translation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
-        var progress = (translation.x / self.viewController.view.bounds.size.width)
+        let translation = gestureRecognizer.translation(in: gestureRecognizer.view!)
+        var progress = (translation.y / self.viewController.view.bounds.size.height)
         progress = CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
-        
+                
         switch gestureRecognizer.state {
         case .began:
             interactionInProgress = true
+            viewController.dismiss(animated: true, completion: nil)
         case .changed:
-            shouldCompleteTransition = progress > 0.4
+            shouldCompleteTransition = progress > 0.3
+            self.updateTargetViewFrame(progress, center: gestureRecognizer.location(in: gestureRecognizer.view))
             update(progress)
         case .cancelled:
             interactionInProgress = false
@@ -67,9 +57,38 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
                 cancel()
             } else {
                 finish()
+                self.finishAnimation()
             }
         default: break
         }
     }
+    
+    
+    func updateTargetViewFrame(_ progress: CGFloat, center: CGPoint) {
+        
+        let targetframe : CGSize = self.dismissAnimator.element.targetFrame.size
+        let currentSize = CGSize(width: targetframe.width*(1-progress), height: targetframe.height*(1-progress))
+        let currentOrigin = CGPoint(x: center.x - (currentSize.width/2), y: center.y - (currentSize.height/2) + 64)
+        let currentFrame : CGRect = CGRect(origin: currentOrigin, size: currentSize)
+        
+        self.dismissAnimator.element.sourceSnapView.frame = currentFrame
+        
+    }
+    
+    func finishAnimation() {
+        self.dismissAnimator.element.sourceView.isHidden = true
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0,
+                       options: UIViewAnimationOptions(),
+                       animations: { 
+                        self.dismissAnimator.element.sourceSnapView.frame = self.dismissAnimator.element.sourceFrame
+        }) { (complete) in
+            self.dismissAnimator.element.sourceSnapView.isHidden = true
+            self.dismissAnimator.element.sourceView.isHidden = false
+        }
+    }
+    
     
 }

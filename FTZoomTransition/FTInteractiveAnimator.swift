@@ -3,20 +3,21 @@
 //  FTZoomTransition
 //
 //  Created by liufengting on 14/12/2016.
-//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
+//  Copyright © 2016 LiuFengting <https://github.com/liufengting>. All rights reserved.
 //
 
 import UIKit
 
 public class FTInteractiveAnimator : UIPercentDrivenInteractiveTransition, UIGestureRecognizerDelegate {
     
-    internal weak var navigationController: UINavigationController?
-    
     public var interactionInProgress = false
-    
+
+    public weak var dismissAnimator: FTDismissAnimator!
+
     fileprivate var shouldCompleteTransition = false
     
     fileprivate weak var viewController: UIViewController!
+
     
     public func wireToViewController(_ viewController: UIViewController!) {
         self.viewController = viewController
@@ -48,6 +49,7 @@ public class FTInteractiveAnimator : UIPercentDrivenInteractiveTransition, UIGes
             interactionInProgress = true
         case .changed:
             shouldCompleteTransition = progress > 0.4
+            self.updateTargetViewFrame(progress)
             update(progress)
         case .cancelled:
             interactionInProgress = false
@@ -62,5 +64,18 @@ public class FTInteractiveAnimator : UIPercentDrivenInteractiveTransition, UIGes
         default: break
         }
     }
+    
+    
+    func updateTargetViewFrame(_ progress: CGFloat) {
+        let sourceFrame : CGRect = self.dismissAnimator.element.sourceFrame
+        let targetFrame : CGRect = self.dismissAnimator.element.targetFrame
+        let x : CGFloat = targetFrame.origin.x - (targetFrame.origin.x - sourceFrame.origin.x)*progress
+        let y : CGFloat = targetFrame.origin.y - (targetFrame.origin.y - sourceFrame.origin.y)*progress
+        let w : CGFloat = targetFrame.size.width - (targetFrame.size.width - sourceFrame.size.width)*progress
+        let h : CGFloat = targetFrame.size.height - (targetFrame.size.height - sourceFrame.size.height)*progress
+        
+        self.dismissAnimator.element.sourceSnapView.frame = CGRect(x: x, y: y, width: w, height: h)
+    }
+
     
 }

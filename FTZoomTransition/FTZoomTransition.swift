@@ -3,21 +3,21 @@
 //  FTZoomTransition
 //
 //  Created by liufengting on 30/11/2016.
-//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
+//  Copyright © 2016 LiuFengting <https://github.com/liufengting>. All rights reserved.
 //
 
 import UIKit
 
 public class FTZoomTransitionElement {
     
-    var sourceView : UIView!
-    var sourceSnapView : UIView!
-    var sourceFrame : CGRect!
-    var targetView : UIView!
-    var targetFrame : CGRect!
+    public var sourceView : UIView!
+    public var sourceSnapView : UIView!
+    public var sourceFrame : CGRect!
+    public var targetView : UIView!
+    public var targetFrame : CGRect!
     public var enableZoom : Bool = false
-    public var presentAnimationDuriation : TimeInterval = 0.4
-    public var dismissAnimationDuriation : TimeInterval = 0.4
+    public var presentAnimationDuriation : TimeInterval = 0.3
+    public var dismissAnimationDuriation : TimeInterval = 0.3
     
     
     public init(sourceView: UIView, sourceSnapView : UIView, sourceFrame: CGRect, targetView: UIView, targetFrame: CGRect) {
@@ -40,8 +40,18 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
     
     public let presentAnimator = FTPresentAnimator()
     public let dismissAnimator = FTDismissAnimator()
-    public let interactiveAnimator = FTInteractiveAnimator()
+    public let edgePanDismissAnimator = FTInteractiveAnimator()
+    public let panDismissAnimator = FTPanDismissAnimator()
     
+    
+    public func wireEdgePanDismissToViewController(_ viewController: UIViewController!) {
+        self.edgePanDismissAnimator.wireToViewController(viewController)
+    }
+    
+    public func wirePanDismissToViewController(_ viewController: UIViewController!, for view: UIView) {
+        self.panDismissAnimator.wireToViewController(viewController, for: view)
+    }
+
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return presentAnimator
     }
@@ -51,7 +61,15 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
     }
     
     public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactiveAnimator.interactionInProgress == true ? interactiveAnimator : nil
+        if panDismissAnimator.interactionInProgress == true {
+            panDismissAnimator.dismissAnimator = dismissAnimator
+            return panDismissAnimator
+        }else if edgePanDismissAnimator.interactionInProgress == true {
+            edgePanDismissAnimator.dismissAnimator = dismissAnimator
+            return edgePanDismissAnimator
+        }else{
+            return nil
+        }
     }
     
 }

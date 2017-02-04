@@ -3,7 +3,7 @@
 //  FTZoomTransition
 //
 //  Created by liufengting on 29/11/2016.
-//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
+//  Copyright © 2016 LiuFengting <https://github.com/liufengting>. All rights reserved.
 //
 
 import UIKit
@@ -30,8 +30,9 @@ class ViewController: UIViewController {
         let screenWidth = UIScreen.main.bounds.size.width
         let targetRect = CGRect(x: 0, y: 64, width: screenWidth, height: screenWidth)
         
-        ftZoomTransition.interactiveAnimator.wireToViewController(detialVC)
-
+        ftZoomTransition.wirePanDismissToViewController(detialVC, for: detialVC.targetImageView)
+//        ftZoomTransition.wireEdgePanDismissToViewController(detialVC)
+        
         let element = FTZoomTransitionElement(sourceView: sender,
                                               sourceSnapView: sender.snapshotView(afterScreenUpdates: false)!,
                                               sourceFrame: sourceRect,

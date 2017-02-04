@@ -61,17 +61,7 @@
                     <view key="view" contentMode="scaleToFill" id="qdQ-1v-Tg9">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uGy-wP-0WY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                            </scrollView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="uGy-wP-0WY" firstAttribute="top" secondItem="qdQ-1v-Tg9" secondAttribute="top" id="9Rr-Ti-6RH"/>
-                            <constraint firstItem="Ds8-ZA-Nqc" firstAttribute="top" secondItem="uGy-wP-0WY" secondAttribute="bottom" id="KQf-A8-768"/>
-                            <constraint firstItem="uGy-wP-0WY" firstAttribute="leading" secondItem="qdQ-1v-Tg9" secondAttribute="leading" id="VLZ-82-xVX"/>
-                            <constraint firstAttribute="trailing" secondItem="uGy-wP-0WY" secondAttribute="trailing" id="WEX-iR-NT9"/>
-                        </constraints>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Detial" id="qsa-AZ-Cgf">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="64G-Jz-vlz">
@@ -85,9 +75,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="scrollView" destination="uGy-wP-0WY" id="GwP-Zo-0iU"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqV-mI-NF0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -135,9 +122,14 @@
             <objects>
                 <navigationController storyboardIdentifier="DetialNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W6i-pS-AMT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ced-tB-gC0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ced-tB-gC0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

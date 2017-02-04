@@ -3,7 +3,7 @@
 //  FTZoomTransition
 //
 //  Created by liufengting on 30/11/2016.
-//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
+//  Copyright © 2016 LiuFengting <https://github.com/liufengting>. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     public var element : FTZoomTransitionElement!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
-        return max(0.4, element.dismissAnimationDuriation)
+        return max(0.3, element.dismissAnimationDuriation)
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -49,10 +49,11 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
             options: .calculationModeCubic,
             animations:{
                 UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
-                    self.element.sourceSnapView.frame = self.element.sourceFrame
                     toVC.view.alpha = 1
+                    if (!transitionContext.isInteractive) {
+                        self.element.sourceSnapView.frame = self.element.sourceFrame
+                    }
                 })
-                
                 if self.element.enableZoom == true {
                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
                         toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
@@ -63,16 +64,21 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                     fromVC.view.alpha = 0
                 })
                 
-                
         }, completion: { (completed) -> () in
             
             if (transitionContext.transitionWasCancelled == true){
-                toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                if self.element.enableZoom == true {
+                    toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                }
                 container.bringSubview(toFront: fromVC.view)
             }
+            self.element.sourceSnapView.isHidden = transitionContext.transitionWasCancelled
             self.element.sourceView.isHidden = transitionContext.transitionWasCancelled
             self.element.targetView.isHidden = !transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
+        
+
     }
+    
 }

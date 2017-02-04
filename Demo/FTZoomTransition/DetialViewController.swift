@@ -3,14 +3,13 @@
 //  FTZoomTransition
 //
 //  Created by liufengting on 29/11/2016.
-//  Copyright © 2016 LiuFengting (https://github.com/liufengting) . All rights reserved.
+//  Copyright © 2016 LiuFengting <https://github.com/liufengting>. All rights reserved.
 //
 
 import UIKit
 
 class DetialViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
     
     public lazy var targetImageView : UIImageView = {
         let screenWidth = UIScreen.main.bounds.size.width
@@ -22,8 +21,7 @@ class DetialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height*2)
-        scrollView.addSubview(targetImageView)
+        self.view.addSubview(targetImageView)
     }
     
     @IBAction func dismissButtonTapped(_ sender: UIBarButtonItem) {
