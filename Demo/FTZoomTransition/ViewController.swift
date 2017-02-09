@@ -30,8 +30,6 @@ class ViewController: UIViewController {
         let screenWidth = UIScreen.main.bounds.size.width
         let targetRect = CGRect(x: 0, y: 64, width: screenWidth, height: screenWidth)
         
-        ftZoomTransition.wirePanDismissToViewController(detialVC, for: detialVC.targetImageView)
-//        ftZoomTransition.wireEdgePanDismissToViewController(detialVC)
         
         let element = FTZoomTransitionElement(sourceView: sender,
                                               sourceSnapView: sender.snapshotView(afterScreenUpdates: false)!,
@@ -39,10 +37,9 @@ class ViewController: UIViewController {
                                               targetView: detialVC.targetImageView,
                                               targetFrame: targetRect)
         
-//        element.enableZoom = true
-        
         ftZoomTransition.element = element
-        
+        ftZoomTransition.wirePanDismissToViewController(detialVC, for: detialVC.targetImageView)
+
         detial.transitioningDelegate = ftZoomTransition
         self.present(detial, animated: true, completion: {
 

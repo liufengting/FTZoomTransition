@@ -45,8 +45,8 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
             interactionInProgress = true
             viewController.dismiss(animated: true, completion: nil)
         case .changed:
-            shouldCompleteTransition = progress > 0.3
-            self.updateTargetViewFrame(progress, center: gestureRecognizer.location(in: gestureRecognizer.view))
+            shouldCompleteTransition = progress > 0.2
+            self.updateTargetViewFrame(progress, translation: translation)
             update(progress)
         case .cancelled:
             interactionInProgress = false
@@ -64,15 +64,15 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
     }
     
     
-    func updateTargetViewFrame(_ progress: CGFloat, center: CGPoint) {
-        
-        let targetframe : CGSize = self.dismissAnimator.element.targetFrame.size
-        let currentSize = CGSize(width: targetframe.width*(1-progress), height: targetframe.height*(1-progress))
-        let currentOrigin = CGPoint(x: center.x - (currentSize.width/2), y: center.y - (currentSize.height/2) + 64)
-        let currentFrame : CGRect = CGRect(origin: currentOrigin, size: currentSize)
-        
-        self.dismissAnimator.element.sourceSnapView.frame = currentFrame
-        
+    func updateTargetViewFrame(_ progress: CGFloat, translation: CGPoint) {
+        let sourceFrame : CGRect = self.dismissAnimator.element.targetFrame
+
+        let targetWidth = sourceFrame.width*(1-progress)
+        let targetHeight = sourceFrame.height*(1-progress)
+        let targetX = sourceFrame.origin.x + sourceFrame.size.width/2 - targetWidth/2 + translation.x
+        let targetY = sourceFrame.origin.y + sourceFrame.size.height/2 - targetHeight/2 + translation.y
+
+        self.dismissAnimator.element.sourceSnapView.frame = CGRect(x: targetX, y: targetY, width: targetWidth, height: targetHeight)
     }
     
     func finishAnimation() {

@@ -40,18 +40,13 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
     
     public let presentAnimator = FTPresentAnimator()
     public let dismissAnimator = FTDismissAnimator()
-    public let edgePanDismissAnimator = FTInteractiveAnimator()
     public let panDismissAnimator = FTPanDismissAnimator()
-    
-    
-    public func wireEdgePanDismissToViewController(_ viewController: UIViewController!) {
-        self.edgePanDismissAnimator.wireToViewController(viewController)
-    }
     
     public func wirePanDismissToViewController(_ viewController: UIViewController!, for view: UIView) {
         self.panDismissAnimator.wireToViewController(viewController, for: view)
     }
 
+    
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return presentAnimator
     }
@@ -64,9 +59,6 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
         if panDismissAnimator.interactionInProgress == true {
             panDismissAnimator.dismissAnimator = dismissAnimator
             return panDismissAnimator
-        }else if edgePanDismissAnimator.interactionInProgress == true {
-            edgePanDismissAnimator.dismissAnimator = dismissAnimator
-            return edgePanDismissAnimator
         }else{
             return nil
         }
