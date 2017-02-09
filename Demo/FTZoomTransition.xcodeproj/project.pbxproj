@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		2A65BA7C1E137B45004A7381 /* FTPanDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A65BA7B1E137B45004A7381 /* FTPanDismissAnimator.swift */; };
 		2A815F1D1DEFCED800A95C11 /* FTDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */; };
-		2A815F1F1DEFCED800A95C11 /* FTPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */; };
 		2A815F201DEFCED800A95C11 /* FTZoomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */; };
+		2A9312AC1E4C4D5E00EB5433 /* FTPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9312AB1E4C4D5E00EB5433 /* FTPresentAnimator.swift */; };
 		2AF2B1321DED62EB006CC00A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF2B1311DED62EB006CC00A /* AppDelegate.swift */; };
 		2AF2B1341DED62EB006CC00A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF2B1331DED62EB006CC00A /* ViewController.swift */; };
 		2AF2B1371DED62EB006CC00A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AF2B1351DED62EB006CC00A /* Main.storyboard */; };
@@ -22,8 +22,8 @@
 /* Begin PBXFileReference section */
 		2A65BA7B1E137B45004A7381 /* FTPanDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPanDismissAnimator.swift; sourceTree = "<group>"; };
 		2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTDismissAnimator.swift; sourceTree = "<group>"; };
-		2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPresentAnimator.swift; sourceTree = "<group>"; };
 		2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTZoomTransition.swift; sourceTree = "<group>"; };
+		2A9312AB1E4C4D5E00EB5433 /* FTPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPresentAnimator.swift; sourceTree = "<group>"; };
 		2AF2B12E1DED62EB006CC00A /* FTZoomTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTZoomTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF2B1311DED62EB006CC00A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AF2B1331DED62EB006CC00A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,8 +48,8 @@
 		2A815F171DEFCED800A95C11 /* FTZoomTransition */ = {
 			isa = PBXGroup;
 			children = (
+				2A9312AB1E4C4D5E00EB5433 /* FTPresentAnimator.swift */,
 				2A815F1B1DEFCED800A95C11 /* FTZoomTransition.swift */,
-				2A815F1A1DEFCED800A95C11 /* FTPresentAnimator.swift */,
 				2A815F181DEFCED800A95C11 /* FTDismissAnimator.swift */,
 				2A65BA7B1E137B45004A7381 /* FTPanDismissAnimator.swift */,
 			);
@@ -163,9 +163,9 @@
 			files = (
 				2AF2B1341DED62EB006CC00A /* ViewController.swift in Sources */,
 				2AF2B1441DED649F006CC00A /* DetialViewController.swift in Sources */,
+				2A9312AC1E4C4D5E00EB5433 /* FTPresentAnimator.swift in Sources */,
 				2AF2B1321DED62EB006CC00A /* AppDelegate.swift in Sources */,
 				2A815F201DEFCED800A95C11 /* FTZoomTransition.swift in Sources */,
-				2A815F1F1DEFCED800A95C11 /* FTPresentAnimator.swift in Sources */,
 				2A65BA7C1E137B45004A7381 /* FTPanDismissAnimator.swift in Sources */,
 				2A815F1D1DEFCED800A95C11 /* FTDismissAnimator.swift in Sources */,
 			);

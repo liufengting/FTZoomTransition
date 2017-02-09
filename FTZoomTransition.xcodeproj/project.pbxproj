@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A6CEF901E10BBF2003F9F30 /* FTInteractiveAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CEF8F1E10BBF2003F9F30 /* FTInteractiveAnimator.swift */; };
+		2A9312A81E4C4D0E00EB5433 /* FTPanDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9312A71E4C4D0E00EB5433 /* FTPanDismissAnimator.swift */; };
+		2A9312AE1E4C4D6D00EB5433 /* FTPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9312AD1E4C4D6D00EB5433 /* FTPresentAnimator.swift */; };
 		2AF0BAD81DF14CBF00C4F8FA /* FTZoomTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AF0BAD61DF14CBF00C4F8FA /* FTZoomTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2AF0BAE11DF14D0D00C4F8FA /* FTDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0BADE1DF14D0D00C4F8FA /* FTDismissAnimator.swift */; };
-		2AF0BAE21DF14D0D00C4F8FA /* FTPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0BADF1DF14D0D00C4F8FA /* FTPresentAnimator.swift */; };
 		2AF0BAE31DF14D0D00C4F8FA /* FTZoomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0BAE01DF14D0D00C4F8FA /* FTZoomTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A6CEF8F1E10BBF2003F9F30 /* FTInteractiveAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTInteractiveAnimator.swift; sourceTree = "<group>"; };
+		2A9312A71E4C4D0E00EB5433 /* FTPanDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPanDismissAnimator.swift; sourceTree = "<group>"; };
+		2A9312AD1E4C4D6D00EB5433 /* FTPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPresentAnimator.swift; sourceTree = "<group>"; };
 		2AF0BAD31DF14CBF00C4F8FA /* FTZoomTransition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FTZoomTransition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF0BAD61DF14CBF00C4F8FA /* FTZoomTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTZoomTransition.h; sourceTree = "<group>"; };
 		2AF0BAD71DF14CBF00C4F8FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AF0BADE1DF14D0D00C4F8FA /* FTDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTDismissAnimator.swift; sourceTree = "<group>"; };
-		2AF0BADF1DF14D0D00C4F8FA /* FTPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPresentAnimator.swift; sourceTree = "<group>"; };
 		2AF0BAE01DF14D0D00C4F8FA /* FTZoomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTZoomTransition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,9 +56,9 @@
 			children = (
 				2AF0BAD61DF14CBF00C4F8FA /* FTZoomTransition.h */,
 				2AF0BAE01DF14D0D00C4F8FA /* FTZoomTransition.swift */,
+				2A9312AD1E4C4D6D00EB5433 /* FTPresentAnimator.swift */,
 				2AF0BADE1DF14D0D00C4F8FA /* FTDismissAnimator.swift */,
-				2AF0BADF1DF14D0D00C4F8FA /* FTPresentAnimator.swift */,
-				2A6CEF8F1E10BBF2003F9F30 /* FTInteractiveAnimator.swift */,
+				2A9312A71E4C4D0E00EB5433 /* FTPanDismissAnimator.swift */,
 				2AF0BAD71DF14CBF00C4F8FA /* Info.plist */,
 			);
 			path = FTZoomTransition;
@@ -102,7 +102,7 @@
 		2AF0BACA1DF14CBF00C4F8FA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = LiuFengting;
 				TargetAttributes = {
 					2AF0BAD21DF14CBF00C4F8FA = {
@@ -145,9 +145,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A9312AE1E4C4D6D00EB5433 /* FTPresentAnimator.swift in Sources */,
 				2AF0BAE31DF14D0D00C4F8FA /* FTZoomTransition.swift in Sources */,
-				2A6CEF901E10BBF2003F9F30 /* FTInteractiveAnimator.swift in Sources */,
-				2AF0BAE21DF14D0D00C4F8FA /* FTPresentAnimator.swift in Sources */,
+				2A9312A81E4C4D0E00EB5433 /* FTPanDismissAnimator.swift in Sources */,
 				2AF0BAE11DF14D0D00C4F8FA /* FTDismissAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +173,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -226,6 +227,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
