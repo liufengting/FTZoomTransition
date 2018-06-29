@@ -8,33 +8,33 @@
 
 import UIKit
 
-public class FTZoomTransitionElement {
+public class FTZoomTransitionConfig {
     
-    public var sourceView : UIView!
-    public var sourceSnapView : UIView!
-    public var sourceFrame : CGRect!
-    public var targetView : UIView!
-    public var targetFrame : CGRect!
+    public var sourceView = UIView()
+    public var sourceSnapView = UIView()
+    public var sourceFrame = CGRect.zero
+    public var targetView = UIView()
+    public var targetFrame = CGRect.zero
     public var enableZoom : Bool = false
     public var presentAnimationDuriation : TimeInterval = 0.3
     public var dismissAnimationDuriation : TimeInterval = 0.3
     
-    
-    public init(sourceView: UIView, sourceSnapView : UIView, sourceFrame: CGRect, targetView: UIView, targetFrame: CGRect) {
+    public convenience init(sourceView: UIView, targetView: UIView, targetFrame: CGRect) {
+        self.init()
         self.sourceView = sourceView
-        self.sourceSnapView = sourceSnapView
-        self.sourceFrame = sourceFrame
         self.targetView = targetView
         self.targetFrame = targetFrame
+        self.sourceFrame = (self.sourceView.superview?.convert(self.sourceView.frame, to: UIApplication.shared.keyWindow))!;
+        self.sourceSnapView = self.sourceView.snapshotView(afterScreenUpdates: false)!;
     }
 }
 
 public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
     
-    public var element : FTZoomTransitionElement! {
+    public var config : FTZoomTransitionConfig! {
         willSet{
-            presentAnimator.element = newValue
-            dismissAnimator.element = newValue
+            presentAnimator.config = newValue
+            dismissAnimator.config = newValue
         }
     }
     
@@ -45,7 +45,6 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
     public func wirePanDismissToViewController(_ viewController: UIViewController!, for view: UIView) {
         self.panDismissAnimator.wireToViewController(viewController, for: view)
     }
-
     
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return presentAnimator
@@ -63,7 +62,6 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
             return nil
         }
     }
-    
 }
 
 public extension UIView {
@@ -87,5 +85,4 @@ public extension UIView {
         self.layer.position = position
         self.layer.anchorPoint = anchorPoint
     }
-    
 }

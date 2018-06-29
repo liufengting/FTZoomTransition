@@ -10,15 +10,15 @@ import UIKit
 
 public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     
-    public var element : FTZoomTransitionElement!
+    public var config : FTZoomTransitionConfig!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
-        return max(0.3, element.presentAnimationDuriation)
+        return max(0.3, config.presentAnimationDuriation)
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        if element == nil {
+        if config == nil {
             return
         }
         
@@ -31,54 +31,44 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         container.addSubview(fromVC.view)
         container.addSubview(toVC.view)
         
-        self.element.sourceSnapView.frame = element.sourceFrame
-        container.addSubview(element.sourceSnapView)
-        
-        self.element.sourceView.isHidden = true
-        self.element.targetView.isHidden = true
-        
+        self.config.sourceSnapView.frame = config.sourceFrame
+        container.addSubview(config.sourceSnapView)
+        self.config.sourceView.isHidden = true
+        self.config.targetView.isHidden = true
         toVC.view.alpha = 0
         
-        let zoomScale : CGFloat = self.element.targetFrame.size.width/self.element.sourceFrame.size.width
+        let zoomScale : CGFloat = self.config.targetFrame.size.width/self.config.sourceFrame.size.width
         
-        if self.element.enableZoom == true {
-            let sourcePoint : CGPoint = self.element.sourceFrame.origin
-            let targetPoint : CGPoint = self.element.targetFrame.origin
+        if self.config.enableZoom == true {
+            let sourcePoint : CGPoint = self.config.sourceFrame.origin
+            let targetPoint : CGPoint = self.config.targetFrame.origin
             var anchorPoint : CGPoint = CGPoint(x: (abs(sourcePoint.x*zoomScale)-targetPoint.x)/container.bounds.size.width, y: (abs((sourcePoint.y*zoomScale)-targetPoint.y))/container.bounds.size.height)
             if sourcePoint.x >= container.bounds.size.width/2 {
-                anchorPoint = CGPoint(x: (self.element.sourceFrame.origin.x + self.element.sourceFrame.size.width)/container.bounds.size.width, y: (abs(sourcePoint.y*zoomScale-targetPoint.y))/container.bounds.size.height)
+                anchorPoint = CGPoint(x: (self.config.sourceFrame.origin.x + self.config.sourceFrame.size.width)/container.bounds.size.width, y: (abs(sourcePoint.y*zoomScale-targetPoint.y))/container.bounds.size.height)
             }
             fromVC.view.setAnchorPoint(anchorPoint: anchorPoint)
         }
         
-        
-        UIView.animateKeyframes(
-            withDuration: transitionDuration(using: transitionContext),
-            delay: 0,
-            options: .calculationModeCubic,
-            animations: {
-                
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0, animations: {
-                    self.element.sourceSnapView.frame = self.element.targetFrame
-                    fromVC.view.alpha = 0
-                    
-                })
-                
-                if self.element.enableZoom == true {
-                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1, animations: {
-                        fromVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
-                    })
-                }
-                UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2, animations: {
-                    toVC.view.alpha = 1
-                })
-                
-                
+        UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext),
+                                delay: 0,
+                                options: UIView.KeyframeAnimationOptions.calculationModeCubic,
+                                animations: {
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0, animations: {
+                                        self.config.sourceSnapView.frame = self.config.targetFrame
+                                        fromVC.view.alpha = 0
+                                    })
+                                    
+                                    if self.config.enableZoom == true {
+                                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1, animations: {
+                                            fromVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
+                                        })
+                                    }
+                                    UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2, animations: {
+                                        toVC.view.alpha = 1
+                                    })
         }, completion: { (completed) -> () in
-            
-            
-            self.element.targetView.isHidden = false
-            self.element.sourceSnapView.isHidden = true
+            self.config.targetView.isHidden = false
+            self.config.sourceSnapView.isHidden = true
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }

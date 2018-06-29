@@ -10,14 +10,14 @@ import UIKit
 
 public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     
-    public var element : FTZoomTransitionElement!
+    public var config : FTZoomTransitionConfig!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
-        return max(0.3, element.dismissAnimationDuriation)
+        return max(0.3, config.dismissAnimationDuriation)
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        if element == nil {
+        if config == nil {
             return
         }
         
@@ -31,54 +31,50 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         toVC.view.alpha = 0
         
         container.addSubview(toVC.view)
-        container.addSubview(self.element.sourceSnapView)
+        container.addSubview(self.config.sourceSnapView)
         
-        self.element.sourceSnapView.frame = element.targetFrame
-        self.element.sourceSnapView.isHidden = false
-        self.element.targetView.isHidden = true
+        self.config.sourceSnapView.frame = config.targetFrame
+        self.config.sourceSnapView.isHidden = false
+        self.config.targetView.isHidden = true
         
-        let zoomScale : CGFloat = self.element.targetFrame.size.width/self.element.sourceFrame.size.width
+        let zoomScale : CGFloat = self.config.targetFrame.size.width/self.config.sourceFrame.size.width
         
-        if self.element.enableZoom == true {
+        if self.config.enableZoom == true {
             toVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
         }
         
-        UIView.animateKeyframes(
-            withDuration: transitionDuration(using: transitionContext),
-            delay: 0,
-            options: .calculationModeCubic,
-            animations:{
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
-                    toVC.view.alpha = 1
-                    if (!transitionContext.isInteractive) {
-                        self.element.sourceSnapView.frame = self.element.sourceFrame
-                    }
-                })
-                if self.element.enableZoom == true {
-                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
-                        toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
-                    })
-                }
-                
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: {
-                    fromVC.view.alpha = 0
-                })
-                
+        UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext),
+                                delay: 0,
+                                options: UIView.KeyframeAnimationOptions.calculationModeCubic,
+                                animations:{
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
+                                        toVC.view.alpha = 1
+                                        if (!transitionContext.isInteractive) {
+                                            self.config.sourceSnapView.frame = self.config.sourceFrame
+                                        }
+                                    })
+                                    if self.config.enableZoom == true {
+                                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
+                                            toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                                        })
+                                    }
+                                    
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: {
+                                        fromVC.view.alpha = 0
+                                    })
+                                    
         }, completion: { (completed) -> () in
-            
-            if (transitionContext.transitionWasCancelled == true){
-                if self.element.enableZoom == true {
-                    toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
-                }
-                container.bringSubview(toFront: fromVC.view)
-            }
-            self.element.sourceSnapView.isHidden = transitionContext.transitionWasCancelled
-            self.element.sourceView.isHidden = transitionContext.transitionWasCancelled
-            self.element.targetView.isHidden = !transitionContext.transitionWasCancelled
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                                    
+                                    if (transitionContext.transitionWasCancelled == true){
+                                        if self.config.enableZoom == true {
+                                            toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                                        }
+                                        container.bringSubviewToFront(fromVC.view)
+                                    }
+                                    self.config.sourceSnapView.isHidden = transitionContext.transitionWasCancelled
+                                    self.config.sourceView.isHidden = transitionContext.transitionWasCancelled
+                                    self.config.targetView.isHidden = !transitionContext.transitionWasCancelled
+                                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
-        
-
     }
-    
 }
