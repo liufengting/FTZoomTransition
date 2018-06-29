@@ -67,11 +67,12 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
         self.dismissAnimator.config.sourceSnapView.frame = CGRect(x: targetX, y: targetY, width: targetWidth, height: targetHeight)
     }
     
+    let animationOption = UIViewAnimationOptions.curveEaseIn
     func finishAnimation() {
         self.dismissAnimator.config.sourceView.isHidden = true
         UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       options: UIView.AnimationOptions.curveEaseIn,
+                       options: animationOption,
                        animations: { 
                         self.dismissAnimator.config.sourceSnapView.frame = self.dismissAnimator.config.sourceFrame
         }) { (complete) in

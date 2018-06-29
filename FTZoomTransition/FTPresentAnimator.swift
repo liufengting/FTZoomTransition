@@ -49,9 +49,10 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
             fromVC.view.setAnchorPoint(anchorPoint: anchorPoint)
         }
         
+        let keyframeAnimationOption = UIViewKeyframeAnimationOptions.calculationModeCubic
         UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext),
                                 delay: 0,
-                                options: UIView.KeyframeAnimationOptions.calculationModeCubic,
+                                options: keyframeAnimationOption,
                                 animations: {
                                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0, animations: {
                                         self.config.sourceSnapView.frame = self.config.targetFrame
