@@ -15,7 +15,7 @@
 | 0.0.8 | 2016.12.14 | make some changes |
 | 0.0.9 | 2016.12.27 | make some adjustments |
 | 0.1.0 | 2017.02.09 | change dismiss with edge pan to pan gesture |
-| 0.1.2 | 2018.06.29 | fix |
+| 0.1.3 | 2018.06.29 | fix |
 
 
 
