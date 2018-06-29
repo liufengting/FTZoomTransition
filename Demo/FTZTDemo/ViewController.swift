@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FTZoomTransition
 
 class ViewController: UIViewController {
 
@@ -27,10 +28,10 @@ class ViewController: UIViewController {
         let screenWidth = UIScreen.main.bounds.size.width
         let targetRect = CGRect(x: 0, y: 64, width: screenWidth, height: screenWidth)
         
-        let element = FTZoomTransitionConfig(sourceView: sender,
-                                              targetView: detialVC.targetImageView,
-                                              targetFrame: targetRect)
-        ftZoomTransition.config = element
+        let config = FTZoomTransitionConfig(sourceView: sender,
+                                            targetView: detialVC.targetImageView,
+                                            targetFrame: targetRect)
+        ftZoomTransition.config = config
         ftZoomTransition.wirePanDismissToViewController(detialVC, for: detialVC.targetImageView)
         detial.transitioningDelegate = ftZoomTransition
         self.present(detial, animated: true, completion: {

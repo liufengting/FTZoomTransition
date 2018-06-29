@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  FTZoomTransition
+//  FTZTDemo
 //
-//  Created by liufengting on 29/11/2016.
-//  Copyright © 2016 LiuFengting <https://github.com/liufengting>. All rights reserved.
+//  Created by liufengting on 2018/6/29.
+//  Copyright © 2018年 liufengting. All rights reserved.
 //
 
 import UIKit
@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        self.window?.backgroundColor = UIColor.white
-        
         return true
     }
 

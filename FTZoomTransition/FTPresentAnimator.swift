@@ -40,9 +40,9 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         let zoomScale : CGFloat = self.config.targetFrame.size.width/self.config.sourceFrame.size.width
         
         if self.config.enableZoom == true {
-            let sourcePoint : CGPoint = self.config.sourceFrame.origin
-            let targetPoint : CGPoint = self.config.targetFrame.origin
-            var anchorPoint : CGPoint = CGPoint(x: (abs(sourcePoint.x*zoomScale)-targetPoint.x)/container.bounds.size.width, y: (abs((sourcePoint.y*zoomScale)-targetPoint.y))/container.bounds.size.height)
+            let sourcePoint = self.config.sourceFrame.origin
+            let targetPoint = self.config.targetFrame.origin
+            var anchorPoint = CGPoint(x: (abs(sourcePoint.x*zoomScale)-targetPoint.x)/container.bounds.size.width, y: (abs((sourcePoint.y*zoomScale)-targetPoint.y))/container.bounds.size.height)
             if sourcePoint.x >= container.bounds.size.width/2 {
                 anchorPoint = CGPoint(x: (self.config.sourceFrame.origin.x + self.config.sourceFrame.size.width)/container.bounds.size.width, y: (abs(sourcePoint.y*zoomScale-targetPoint.y))/container.bounds.size.height)
             }
