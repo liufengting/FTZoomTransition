@@ -71,9 +71,7 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
         self.dismissAnimator.config.sourceView.isHidden = true
         UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       usingSpringWithDamping: 0.5,
-                       initialSpringVelocity: 0,
-                       options: UIView.AnimationOptions(),
+                       options: UIView.AnimationOptions.curveEaseIn,
                        animations: { 
                         self.dismissAnimator.config.sourceSnapView.frame = self.dismissAnimator.config.sourceFrame
         }) { (complete) in
