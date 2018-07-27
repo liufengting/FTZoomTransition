@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
+open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     
-    public var config : FTZoomTransitionConfig!
+    open var config : FTZoomTransitionConfig!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
         return max(0.3, config.dismissAnimationDuriation)
@@ -31,12 +31,12 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         toVC.view.alpha = 0
         
         container.addSubview(toVC.view)
-        container.addSubview(self.config.sourceSnapView)
+        container.addSubview(self.config.sourceSnapView!)
         
-        self.config.sourceSnapView.frame = config.targetFrame
-        self.config.sourceSnapView.isHidden = false
-        self.config.targetView.isHidden = true
-        
+        self.config.sourceSnapView?.frame = config.targetFrame
+        self.config.sourceSnapView?.alpha = 1
+        self.config.sourceSnapView?.isHidden = false
+
         let zoomScale : CGFloat = self.config.targetFrame.size.width/self.config.sourceFrame.size.width
         
         if self.config.enableZoom == true {
@@ -51,7 +51,7 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
                                         toVC.view.alpha = 1
                                         if (!transitionContext.isInteractive) {
-                                            self.config.sourceSnapView.frame = self.config.sourceFrame
+                                            self.config.sourceSnapView?.frame = self.config.sourceFrame
                                         }
                                     })
                                     if self.config.enableZoom == true {
@@ -65,17 +65,17 @@ public class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                                     })
                                     
         }, completion: { (completed) -> () in
-                                    
-                                    if (transitionContext.transitionWasCancelled == true){
-                                        if self.config.enableZoom == true {
-                                            toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
-                                        }
-                                        container.bringSubview(toFront: fromVC.view)
-                                    }
-                                    self.config.sourceSnapView.isHidden = transitionContext.transitionWasCancelled
-                                    self.config.sourceView.isHidden = transitionContext.transitionWasCancelled
-                                    self.config.targetView.isHidden = !transitionContext.transitionWasCancelled
-                                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            
+            if (transitionContext.transitionWasCancelled == true){
+                if self.config.enableZoom == true {
+                    toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                }
+                container.bringSubview(toFront: fromVC.view)
+            }
+            self.config.sourceSnapView?.isHidden = transitionContext.transitionWasCancelled
+            self.config.sourceView?.isHidden = transitionContext.transitionWasCancelled
+            //                                    self.config.targetView.isHidden = !transitionContext.transitionWasCancelled
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
 }

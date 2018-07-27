@@ -8,39 +8,39 @@
 
 import UIKit
 
-public class FTZoomTransitionConfig {
+open class FTZoomTransitionConfig {
     
-    public var sourceView = UIView()
-    public var sourceSnapView = UIView()
-    public var sourceFrame = CGRect.zero
-    public var targetView = UIView()
-    public var targetFrame = CGRect.zero
-    public var enableZoom : Bool = false
-    public var presentAnimationDuriation : TimeInterval = 0.3
-    public var dismissAnimationDuriation : TimeInterval = 0.3
+    open var sourceView: UIView?
+    open var sourceSnapView: UIView?
+    open var sourceFrame = CGRect.zero
+    open var targetFrame = CGRect.zero
+    open var enableZoom : Bool = false
+    open var presentAnimationDuriation : TimeInterval = 0.3
+    open var dismissAnimationDuriation : TimeInterval = 0.3
     
-    public convenience init(sourceView: UIView, targetView: UIView, targetFrame: CGRect) {
+    public convenience init(sourceView: UIView, targetFrame: CGRect) {
         self.init()
         self.sourceView = sourceView
-        self.targetView = targetView
         self.targetFrame = targetFrame
-        self.sourceFrame = (self.sourceView.superview?.convert(self.sourceView.frame, to: UIApplication.shared.keyWindow))!;
-        self.sourceSnapView = self.sourceView.snapshotView(afterScreenUpdates: false)!;
+        if self.sourceView != nil {
+            self.sourceFrame = (self.sourceView?.superview?.convert((self.sourceView?.frame)!, to: UIApplication.shared.keyWindow))!;
+            self.sourceSnapView = self.sourceView?.snapshotView(afterScreenUpdates: false)!;
+        }
     }
 }
 
-public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
+open class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
     
-    public var config : FTZoomTransitionConfig! {
+    open var config : FTZoomTransitionConfig! {
         willSet{
             presentAnimator.config = newValue
             dismissAnimator.config = newValue
         }
     }
     
-    public let presentAnimator = FTPresentAnimator()
-    public let dismissAnimator = FTDismissAnimator()
-    public let panDismissAnimator = FTPanDismissAnimator()
+    final let presentAnimator = FTPresentAnimator()
+    final let dismissAnimator = FTDismissAnimator()
+    final let panDismissAnimator = FTPanDismissAnimator()
     
     public func wirePanDismissToViewController(_ viewController: UIViewController!, for view: UIView) {
         self.panDismissAnimator.wireToViewController(viewController, for: view)

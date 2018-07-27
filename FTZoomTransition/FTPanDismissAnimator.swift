@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGestureRecognizerDelegate {
+open class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGestureRecognizerDelegate {
     
-    public var interactionInProgress = false
+    open var interactionInProgress = false
     public weak var dismissAnimator: FTDismissAnimator!
     fileprivate var shouldCompleteTransition = false
     fileprivate weak var viewController: UIViewController!
@@ -62,19 +62,19 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
         let targetX = sourceFrame.origin.x + sourceFrame.size.width/2 - targetWidth/2 + translation.x
         let targetY = sourceFrame.origin.y + sourceFrame.size.height/2 - targetHeight/2 + translation.y
 
-        self.dismissAnimator.config.sourceSnapView.frame = CGRect(x: targetX, y: targetY, width: targetWidth, height: targetHeight)
+        self.dismissAnimator.config.sourceSnapView?.frame = CGRect(x: targetX, y: targetY, width: targetWidth, height: targetHeight)
     }
     
     func finishAnimation() {
-        self.dismissAnimator.config.sourceView.isHidden = true
+        self.dismissAnimator.config.sourceView?.isHidden = true
        UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: UIViewAnimationOptions.curveEaseIn,
                        animations: { 
-                        self.dismissAnimator.config.sourceSnapView.frame = self.dismissAnimator.config.sourceFrame
+                        self.dismissAnimator.config.sourceSnapView?.frame = self.dismissAnimator.config.sourceFrame
         }) { (complete) in
-            self.dismissAnimator.config.sourceSnapView.isHidden = true
-            self.dismissAnimator.config.sourceView.isHidden = false
+            self.dismissAnimator.config.sourceSnapView?.isHidden = true
+            self.dismissAnimator.config.sourceView?.isHidden = false
         }
     }
 }

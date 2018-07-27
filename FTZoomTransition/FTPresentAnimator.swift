@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
+open class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     
-    public var config : FTZoomTransitionConfig!
+    open var config : FTZoomTransitionConfig!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
         return max(0.3, config.presentAnimationDuriation)
@@ -31,10 +31,10 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         container.addSubview(fromVC.view)
         container.addSubview(toVC.view)
         
-        self.config.sourceSnapView.frame = config.sourceFrame
-        container.addSubview(config.sourceSnapView)
-        self.config.sourceView.isHidden = true
-        self.config.targetView.isHidden = true
+        self.config.sourceSnapView?.frame = config.sourceFrame
+        container.addSubview(config.sourceSnapView!)
+        self.config.sourceView?.isHidden = true
+//        self.config.targetView.isHidden = true
         toVC.view.alpha = 0
         
         let zoomScale : CGFloat = self.config.targetFrame.size.width/self.config.sourceFrame.size.width
@@ -55,7 +55,7 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                                 options: keyframeAnimationOption,
                                 animations: {
                                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0, animations: {
-                                        self.config.sourceSnapView.frame = self.config.targetFrame
+                                        self.config.sourceSnapView?.frame = self.config.targetFrame
                                         fromVC.view.alpha = 0
                                     })
                                     
@@ -65,11 +65,12 @@ public class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                                         })
                                     }
                                     UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2, animations: {
+                                        self.config.sourceSnapView?.alpha = 0
                                         toVC.view.alpha = 1
                                     })
         }, completion: { (completed) -> () in
-            self.config.targetView.isHidden = false
-            self.config.sourceSnapView.isHidden = true
+//            self.config.targetView.isHidden = false
+            self.config.sourceSnapView?.isHidden = true
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }

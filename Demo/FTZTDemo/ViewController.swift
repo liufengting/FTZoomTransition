@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         let targetRect = CGRect(x: 0, y: 64, width: screenWidth, height: screenWidth)
         
         let config = FTZoomTransitionConfig(sourceView: sender,
-                                            targetView: detialVC.targetImageView,
                                             targetFrame: targetRect)
         ftZoomTransition.config = config
         ftZoomTransition.wirePanDismissToViewController(detialVC, for: detialVC.targetImageView)
