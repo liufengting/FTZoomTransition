@@ -15,15 +15,14 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
     fileprivate var shouldCompleteTransition = false
     fileprivate weak var viewController: UIViewController!
     fileprivate weak var gestureView: UIView!
-
     
     public func wireToViewController(_ viewController: UIViewController!, for view: UIView) {
         self.viewController = viewController
         self.gestureView = view
-        prepareGestureRecognizerInView(viewController.view)
+        preparePanGestureRecognizerInView(viewController.view)
     }
     
-    fileprivate func prepareGestureRecognizerInView(_ view: UIView) {
+    fileprivate func preparePanGestureRecognizerInView(_ view: UIView) {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
@@ -56,7 +55,6 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
         }
     }
     
-    
     func updateTargetViewFrame(_ progress: CGFloat, translation: CGPoint) {
         let sourceFrame : CGRect = self.dismissAnimator.config.targetFrame
         let targetWidth = sourceFrame.width*(1-progress)
@@ -67,12 +65,11 @@ public class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGest
         self.dismissAnimator.config.sourceSnapView.frame = CGRect(x: targetX, y: targetY, width: targetWidth, height: targetHeight)
     }
     
-    let animationOption = UIViewAnimationOptions.curveEaseIn
     func finishAnimation() {
         self.dismissAnimator.config.sourceView.isHidden = true
-        UIView.animate(withDuration: 0.3,
+       UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       options: animationOption,
+                       options: UIViewAnimationOptions.curveEaseIn,
                        animations: { 
                         self.dismissAnimator.config.sourceSnapView.frame = self.dismissAnimator.config.sourceFrame
         }) { (complete) in

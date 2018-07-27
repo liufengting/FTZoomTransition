@@ -58,7 +58,7 @@ public class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
         if panDismissAnimator.interactionInProgress == true {
             panDismissAnimator.dismissAnimator = dismissAnimator
             return panDismissAnimator
-        }else{
+        } else {
             return nil
         }
     }

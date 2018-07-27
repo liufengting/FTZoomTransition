@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A26FFA7210AB53100E7400C /* FTZoomTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A26FFA6210AB53100E7400C /* FTZoomTransition.framework */; };
 		2AC025FF20E5C31200FF9440 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC025FE20E5C31200FF9440 /* AppDelegate.swift */; };
 		2AC0260620E5C31400FF9440 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AC0260520E5C31400FF9440 /* Assets.xcassets */; };
 		2AC0261220E5C34800FF9440 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC0261020E5C34800FF9440 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A26FFA6210AB53100E7400C /* FTZoomTransition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FTZoomTransition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AC025FB20E5C31200FF9440 /* FTZTDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTZTDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AC025FE20E5C31200FF9440 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AC0260520E5C31400FF9440 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,17 +33,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A26FFA7210AB53100E7400C /* FTZoomTransition.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A26FFA5210AB53100E7400C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A26FFA6210AB53100E7400C /* FTZoomTransition.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2AC025F220E5C31200FF9440 = {
 			isa = PBXGroup;
 			children = (
 				2AC025FD20E5C31200FF9440 /* FTZTDemo */,
 				2AC025FC20E5C31200FF9440 /* Products */,
+				2A26FFA5210AB53100E7400C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +72,8 @@
 				2AC0261520E5C35600FF9440 /* ViewController.swift */,
 				2AC0261420E5C35600FF9440 /* DetialViewController.swift */,
 				2AC0260520E5C31400FF9440 /* Assets.xcassets */,
-				2AC0261120E5C34800FF9440 /* LaunchScreen.storyboard */,
 				2AC0261020E5C34800FF9440 /* Main.storyboard */,
+				2AC0261120E5C34800FF9440 /* LaunchScreen.storyboard */,
 				2AC0260A20E5C31400FF9440 /* Info.plist */,
 			);
 			path = FTZTDemo;
