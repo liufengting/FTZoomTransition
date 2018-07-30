@@ -11,25 +11,34 @@ import UIKit
 open class FTZoomTransitionConfig {
     
     open var sourceView: UIView?
-    open var sourceSnapView: UIView?
     open var sourceFrame = CGRect.zero
     open var targetFrame = CGRect.zero
     open var enableZoom : Bool = false
     open var presentAnimationDuriation : TimeInterval = 0.3
     open var dismissAnimationDuriation : TimeInterval = 0.3
+    open lazy var transitionImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
+        return iv
+    }()
     
-    public convenience init(sourceView: UIView, targetFrame: CGRect) {
+    static func maxAnimationDuriation() -> TimeInterval {
+        return 0.3
+    }
+    
+    public convenience init(sourceView: UIView, image: UIImage?, targetFrame: CGRect) {
         self.init()
         self.sourceView = sourceView
         self.targetFrame = targetFrame
+        self.transitionImageView.image = image
         if self.sourceView != nil {
             self.sourceFrame = (self.sourceView?.superview?.convert((self.sourceView?.frame)!, to: UIApplication.shared.keyWindow))!;
-            self.sourceSnapView = self.sourceView?.snapshotView(afterScreenUpdates: false)!;
         }
     }
 }
 
-open class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate{
+open class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate {
     
     open var config : FTZoomTransitionConfig! {
         willSet{

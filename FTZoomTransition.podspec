@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "FTZoomTransition"
-  s.version      = "0.1.8"
+  s.version      = "0.1.9"
   s.summary      = "Customize the present animation"
   s.description  = <<-DESC
     	FTZoomTransition. Customize the present animation with simple api.
@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/liufengting/FTZoomTransition.git", :tag => "#{s.version}" }
   s.source_files = ["FTZoomTransition/*.swift"]
   s.framework    = "UIKit"
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
 
 end

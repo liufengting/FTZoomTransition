@@ -13,7 +13,7 @@ open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     open var config : FTZoomTransitionConfig!
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
-        return max(0.3, config.dismissAnimationDuriation)
+        return max(FTZoomTransitionConfig.maxAnimationDuriation(), config.dismissAnimationDuriation)
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -26,21 +26,21 @@ open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         let container = transitionContext.containerView
         
         fromVC.view.frame = container.bounds;
-        toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+        toVC.view.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
         toVC.view.frame = container.bounds;
-        toVC.view.alpha = 0
+        toVC.view.alpha = 0.0
         
         container.addSubview(toVC.view)
-        container.addSubview(self.config.sourceSnapView!)
+        container.addSubview(self.config.transitionImageView)
         
-        self.config.sourceSnapView?.frame = config.targetFrame
-        self.config.sourceSnapView?.alpha = 1
-        self.config.sourceSnapView?.isHidden = false
-
+        self.config.transitionImageView.frame = config.targetFrame
+        self.config.transitionImageView.alpha = 1.0
+        self.config.transitionImageView.isHidden = false
+        
         let zoomScale : CGFloat = self.config.targetFrame.size.width/self.config.sourceFrame.size.width
         
         if self.config.enableZoom == true {
-            toVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1)
+            toVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1.0)
         }
         
         let keyframeAnimationOption = UIViewKeyframeAnimationOptions.calculationModeCubic
@@ -48,33 +48,31 @@ open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                                 delay: 0,
                                 options: keyframeAnimationOption,
                                 animations:{
-                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1.0, animations: {
                                         toVC.view.alpha = 1
                                         if (!transitionContext.isInteractive) {
-                                            self.config.sourceSnapView?.frame = self.config.sourceFrame
+                                            self.config.transitionImageView.frame = self.config.sourceFrame
                                         }
                                     })
                                     if self.config.enableZoom == true {
-                                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1, animations: {
-                                            toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1.0, animations: {
+                                            toVC.view.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
                                         })
                                     }
                                     
-                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: {
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.01, animations: {
                                         fromVC.view.alpha = 0
                                     })
                                     
         }, completion: { (completed) -> () in
-            
             if (transitionContext.transitionWasCancelled == true){
                 if self.config.enableZoom == true {
-                    toVC.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+                    toVC.view.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
                 }
                 container.bringSubview(toFront: fromVC.view)
             }
-            self.config.sourceSnapView?.isHidden = transitionContext.transitionWasCancelled
+            self.config.transitionImageView.isHidden = transitionContext.transitionWasCancelled
             self.config.sourceView?.isHidden = transitionContext.transitionWasCancelled
-            //                                    self.config.targetView.isHidden = !transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
