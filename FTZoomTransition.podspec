@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "FTZoomTransition"
-  s.version      = "0.2.0"
+  s.version      = "0.2.1"
   s.summary      = "Customize the present animation"
   s.description  = <<-DESC
     	FTZoomTransition. Customize the present animation with simple api.

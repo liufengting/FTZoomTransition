@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FTZoomTransition
 
 class DetialViewController: UIViewController {
     
@@ -18,9 +19,14 @@ class DetialViewController: UIViewController {
         return imageView
     }()
     
-    lazy var tapGesture : UITapGestureRecognizer = {
+    lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(gesture:)));
         return gesture
+    }()
+    
+    lazy var panGesture: UIPanGestureRecognizer = {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
+        return pan
     }()
     
     @objc func handleTapGesture(gesture: UIGestureRecognizer) {
@@ -29,11 +35,23 @@ class DetialViewController: UIViewController {
         }
     }
     
+    @objc func handlePanGesture(gesture: UIPanGestureRecognizer) {
+        if let trans: FTZoomTransition = self.navigationController?.transitioningDelegate as? FTZoomTransition {
+            trans.panDismissAnimator.handlePanGesture(gesture)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.addSubview(targetImageView)
         self.targetImageView.addGestureRecognizer(self.tapGesture);
+        
+        
+        if let trans: FTZoomTransition = self.navigationController?.transitioningDelegate as? FTZoomTransition {
+            trans.panDismissAnimator.viewController = self
+        }
+        self.view.addGestureRecognizer(self.panGesture)
     }
     
     @IBAction func dismissButtonTapped(_ sender: UIBarButtonItem) {

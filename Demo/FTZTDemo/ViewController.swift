@@ -32,7 +32,7 @@ class ViewController: UIViewController {
                                             image: sender.imageView?.image,
                                             targetFrame: targetRect)
         ftZoomTransition.config = config
-        ftZoomTransition.wirePanDismissToViewController(detialVC, for: detialVC.targetImageView)
+//        ftZoomTransition.wirePanDismissToViewController(detialVC, for: detialVC.targetImageView)
         detial.transitioningDelegate = ftZoomTransition
         self.present(detial, animated: true, completion: {
 
