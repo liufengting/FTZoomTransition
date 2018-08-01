@@ -24,10 +24,10 @@ class DetialViewController: UIViewController {
         return gesture
     }()
     
-    lazy var panGesture: UIPanGestureRecognizer = {
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
-        return pan
-    }()
+//    lazy var panGesture: UIPanGestureRecognizer = {
+//        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
+//        return pan
+//    }()
     
     @objc func handleTapGesture(gesture: UIGestureRecognizer) {
         self.dismiss(animated: true) {
@@ -35,11 +35,11 @@ class DetialViewController: UIViewController {
         }
     }
     
-    @objc func handlePanGesture(gesture: UIPanGestureRecognizer) {
-        if let trans: FTZoomTransition = self.navigationController?.transitioningDelegate as? FTZoomTransition {
-            trans.panDismissAnimator.handlePanGesture(gesture)
-        }
-    }
+//    @objc func handlePanGesture(gesture: UIPanGestureRecognizer) {
+//        if let trans: FTZoomTransition = self.navigationController?.transitioningDelegate as? FTZoomTransition {
+//            trans.panDismissAnimator.handlePanGesture(gesture)
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +48,10 @@ class DetialViewController: UIViewController {
         self.targetImageView.addGestureRecognizer(self.tapGesture);
         
         
-        if let trans: FTZoomTransition = self.navigationController?.transitioningDelegate as? FTZoomTransition {
-            trans.panDismissAnimator.viewController = self
-        }
-        self.view.addGestureRecognizer(self.panGesture)
+//        if let trans: FTZoomTransition = self.navigationController?.transitioningDelegate as? FTZoomTransition {
+//            trans.panDismissAnimator.viewController = self
+//        }
+//        self.view.addGestureRecognizer(self.panGesture)
     }
     
     @IBAction func dismissButtonTapped(_ sender: UIBarButtonItem) {

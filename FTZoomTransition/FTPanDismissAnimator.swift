@@ -8,14 +8,30 @@
 
 import UIKit
 
-open class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGestureRecognizerDelegate {
+open class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition {
     
     public var interactionInProgress = false
     public weak var dismissAnimator: FTDismissAnimator!
     public weak var viewController: UIViewController?
     fileprivate var shouldCompleteTransition = false
-
-    public func wireToViewController(_ viewController: UIViewController, for view: UIView) {
+    
+    lazy var panGesture : UIPanGestureRecognizer = {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        return gesture
+    }()
+    
+    lazy var edgePanGesture : UIScreenEdgePanGestureRecognizer = {
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        gesture.edges = .left
+        return gesture
+    }()
+    
+    public func wirePanDismissToViewController(viewController: UIViewController, for view: UIView) {
+        self.viewController = viewController
+        preparePanGestureRecognizerInView(viewController.view)
+    }
+    
+    public func wireEdgePanDismissToViewController(viewController: UIViewController) {
         self.viewController = viewController
         preparePanGestureRecognizerInView(viewController.view)
     }
@@ -27,10 +43,10 @@ open class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGestur
     }
     
     public func handleDismissProgress(progress: CGFloat, translation: CGPoint) {
-        shouldCompleteTransition = (progress > 0.2)
+        shouldCompleteTransition = (fabsf(Float(progress)) > 0.2)
         viewController?.view.isHidden = true
         self.updateTargetViewFrame(progress, translation: translation)
-        update(progress)
+        update(CGFloat(fabsf(Float(progress))))
     }
     
     public func handleDismissCancel() {
@@ -46,15 +62,22 @@ open class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGestur
     }
     
     fileprivate func preparePanGestureRecognizerInView(_ view: UIView) {
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        gesture.delegate = self
-        view.addGestureRecognizer(gesture)
+        view.addGestureRecognizer(self.panGesture)
+    }
+    
+    fileprivate func prepareEdgePanGestureRecognizerInView(_ view: UIView) {
+        view.addGestureRecognizer(self.edgePanGesture)
     }
     
     @objc public func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: gestureRecognizer.view!)
-        var progress = (translation.y / UIScreen.main.bounds.size.width)
-        progress = CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
+        var progress: CGFloat = 0.0
+        if gestureRecognizer.isEqual(self.panGesture) {
+            progress = (translation.y / UIScreen.main.bounds.size.height)
+        } else {
+            progress = (translation.x / UIScreen.main.bounds.size.width)
+        }
+        progress = CGFloat(min(max(Float(progress), -1.0), 1.0))
         switch gestureRecognizer.state {
         case .began:
             self.handleDismissBegin()
@@ -74,8 +97,8 @@ open class FTPanDismissAnimator : UIPercentDrivenInteractiveTransition, UIGestur
     
     func updateTargetViewFrame(_ progress: CGFloat, translation: CGPoint) {
         let sourceFrame : CGRect = self.dismissAnimator.config.targetFrame
-        let targetWidth = sourceFrame.width*(1.0-progress)
-        let targetHeight = sourceFrame.height*(1.0-progress)
+        let targetWidth = sourceFrame.width*CGFloat((1.0-fabsf(Float(progress))))
+        let targetHeight = sourceFrame.height*CGFloat((1.0-fabsf(Float(progress))))
         let targetX = sourceFrame.origin.x + sourceFrame.size.width/2.0 - targetWidth/2.0 + translation.x
         let targetY = sourceFrame.origin.y + sourceFrame.size.height/2.0 - targetHeight/2.0 + translation.y
         self.dismissAnimator.config.transitionImageView.frame = CGRect(x: targetX, y: targetY, width: targetWidth, height: targetHeight)
