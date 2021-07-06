@@ -20,5 +20,4 @@
 | 0.1.9 | 2018.07.30 | add more functions for other projects |
 | 0.2.0 | 2018.07.30 | swift 4.0 |
 | 0.2.1 | 2018.07.31 | add more functions for other projects |
-
-
+| 0.2.2 | 2021.07.06 | update to swift 5 |
