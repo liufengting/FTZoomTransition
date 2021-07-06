@@ -21,8 +21,8 @@ open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
             return
         }
         
-        let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
-        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        let fromVC = transitionContext.viewController(forKey: .from)!
+        let toVC = transitionContext.viewController(forKey: .to)!
         let container = transitionContext.containerView
         
         fromVC.view.frame = container.bounds;
@@ -42,8 +42,8 @@ open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
         if self.config.enableZoom == true {
             toVC.view.layer.transform = CATransform3DMakeScale(zoomScale, zoomScale, 1.0)
         }
-        
-        let keyframeAnimationOption = UIViewKeyframeAnimationOptions.calculationModeCubic
+
+        let keyframeAnimationOption = UIView.KeyframeAnimationOptions.calculationModeCubic
         UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext),
                                 delay: 0,
                                 options: keyframeAnimationOption,
@@ -51,6 +51,8 @@ open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration:  1.0, animations: {
                                         toVC.view.alpha = 1
                                         if (!transitionContext.isInteractive) {
+                                            print(self.config.sourceFrame)
+
                                             self.config.transitionImageView.frame = self.config.sourceFrame
                                         }
                                     })
@@ -69,7 +71,7 @@ open class FTDismissAnimator: NSObject, UIViewControllerAnimatedTransitioning{
                 if self.config.enableZoom == true {
                     toVC.view.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
                 }
-                container.bringSubview(toFront: fromVC.view)
+                container.bringSubviewToFront(fromVC.view)
             }
             self.config.transitionImageView.isHidden = transitionContext.transitionWasCancelled
             self.config.sourceView?.isHidden = transitionContext.transitionWasCancelled

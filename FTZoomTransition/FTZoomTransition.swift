@@ -10,7 +10,7 @@ import UIKit
 
 open class FTZoomTransitionConfig {
     
-    open var sourceView: UIView?
+    open weak var sourceView: UIView?
     open var sourceFrame = CGRect.zero
     open var targetFrame = CGRect.zero
     open var enableZoom : Bool = false
@@ -33,7 +33,7 @@ open class FTZoomTransitionConfig {
         self.targetFrame = targetFrame
         self.transitionImageView.image = image
         if self.sourceView != nil {
-            self.sourceFrame = (self.sourceView?.superview?.convert((self.sourceView?.frame)!, to: UIApplication.shared.keyWindow))!;
+            self.sourceFrame = (self.sourceView?.superview?.convert((self.sourceView?.frame)!, to: UIApplication.shared.delegate?.window!)) ?? .zero;
         }
     }
 }
@@ -51,7 +51,7 @@ open class FTZoomTransition: NSObject, UIViewControllerTransitioningDelegate {
     final let dismissAnimator = FTDismissAnimator()
     public let panDismissAnimator = FTPanDismissAnimator()
     
-    public func wirePanDismissToViewController(_ viewController: UIViewController!, for view: UIView) {
+    public func wirePanDismissToViewController(_ viewController: UIViewController, for view: UIView?) {
         self.panDismissAnimator.wirePanDismissToViewController(viewController: viewController, for: view)
     }
     

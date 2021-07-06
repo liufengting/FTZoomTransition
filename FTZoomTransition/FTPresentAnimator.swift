@@ -21,9 +21,8 @@ open class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         if config == nil {
             return
         }
-        
-        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
-        let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toVC = transitionContext.viewController(forKey: .to)!
+        let fromVC = transitionContext.viewController(forKey: .from)!
         let container = transitionContext.containerView
         
         fromVC.view.frame = CGRect(origin: CGPoint.zero, size: container.bounds.size)
@@ -32,6 +31,7 @@ open class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         container.addSubview(toVC.view)
         
         self.config.transitionImageView.frame = config.sourceFrame
+        self.config.transitionImageView.isHidden = false
         container.addSubview(config.transitionImageView)
         self.config.sourceView?.isHidden = true
         toVC.view.alpha = 0
@@ -48,7 +48,7 @@ open class FTPresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             fromVC.view.setAnchorPoint(anchorPoint: anchorPoint)
         }
         
-        let keyframeAnimationOption = UIViewKeyframeAnimationOptions.calculationModeCubic
+        let keyframeAnimationOption = UIView.KeyframeAnimationOptions.calculationModeCubic
         UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext),
                                 delay: 0,
                                 options: keyframeAnimationOption,
